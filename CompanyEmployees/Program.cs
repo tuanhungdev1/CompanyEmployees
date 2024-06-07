@@ -5,22 +5,22 @@ using NLog;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Đường dẫn tới tệp cấu hình
+
 var configFilePath = Path.Combine(AppContext.BaseDirectory, "./nlog.config.txt");
 
-// Kiểm tra xem tệp cấu hình có tồn tại không
+
 if (!File.Exists(configFilePath)) {
     throw new FileNotFoundException($"NLog configuration file not found: {configFilePath}");
 }
 
-// Tải cấu hình NLog bằng phương thức mới
+
 LogManager.Setup().LoadConfigurationFromFile(configFilePath);
 
 
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
-
+builder.Services.ConfigureRepositoryManager();
 
 
 builder.Services.AddControllers();
