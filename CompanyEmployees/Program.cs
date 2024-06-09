@@ -1,4 +1,5 @@
 ﻿using CompanyEmployees.Extensions;
+using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
@@ -34,27 +35,23 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
-} else {
+
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+
+
+app.ConfigureExceptionHandler(logger);
+
+
+if (app.Environment.IsProduction())
     app.UseHsts();
-}
-
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
-
 app.UseForwardedHeaders(new ForwardedHeadersOptions {
     ForwardedHeaders = ForwardedHeaders.All
 });
 
+
 app.UseCors("CorsPolicy");
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
