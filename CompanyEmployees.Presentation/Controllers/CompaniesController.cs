@@ -1,5 +1,6 @@
 ﻿using CompanyEmployees.Presentation.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 using System;
@@ -34,6 +35,7 @@ namespace CompanyEmployees.Presentation.Controllers {
 
 
         [HttpPost]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company) {
             if (company is null)
                 return BadRequest("CompanyForCreationDto object is null");
