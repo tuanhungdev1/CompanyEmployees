@@ -11,6 +11,8 @@ namespace Shared.RequestFeatures {
         public bool ValidAgeRange => MaxAge > MinAge;
 
         public string? SearchTerm { get; set; }
+
+        public EmployeeParameters() => OrderBy = "name";
     }
 
 }
