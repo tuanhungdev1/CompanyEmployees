@@ -1,4 +1,5 @@
 ﻿using CompanyEmployees.Presentation.ModelBinders;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Service.Contracts;
@@ -19,7 +20,8 @@ namespace CompanyEmployees.Presentation.Controllers {
         public CompaniesController(IServiceManager service)  => _service = service;
 
 
-        [HttpGet]
+        [HttpGet(Name = "GetCompanies")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetCompanies() {
             var companies = await _service.CompanyService.GetAllCompaniesAsync(trackChanges: false);
             return Ok(companies);

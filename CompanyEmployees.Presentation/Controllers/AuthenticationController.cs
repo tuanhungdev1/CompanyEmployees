@@ -34,5 +34,17 @@ namespace CompanyEmployees.Presentation.Controllers {
 
             return StatusCode(201);
         }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user) {
+            if(user is null) return BadRequest("user object sent from client is null");
+
+            if(!await _service.AuthenticationService.ValidateUser(user)) {
+                return Unauthorized();
+            }
+
+            return Ok(new { Token = await _service.AuthenticationService.CreateToken() });
+        }
     }
 }
