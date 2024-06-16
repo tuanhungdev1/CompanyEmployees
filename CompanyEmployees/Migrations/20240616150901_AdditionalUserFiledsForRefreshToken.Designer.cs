@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,11 @@ using Repository;
 namespace CompanyEmployees.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240616150901_AdditionalUserFiledsForRefreshToken")]
+    partial class AdditionalUserFiledsForRefreshToken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,19 +228,18 @@ namespace CompanyEmployees.Migrations
                     b.ToTable("AspNetRoles", (string)null);
 
                     b.HasData(
-                        new {
-                            Id = "4ac8240a-8498-4869-bc86-60e5dc982d22",
-                            ConcurrencyStamp = "ec511bd4-4853-426a-a2fc-751886560c9a",
+                        new
+                        {
+                            Id = "97d1621f-c128-4a3f-b269-65ca46d1c410",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
-                        new {
-                            Id = "562419f5-eed1-473b-bcc1-9f2dbab182b2",
-                            ConcurrencyStamp = "937e9988-9f49-4bab-a545-b422dde85016",
+                        new
+                        {
+                            Id = "407ad670-39a1-4cad-a0f0-7bbb4ea25352",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
-
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

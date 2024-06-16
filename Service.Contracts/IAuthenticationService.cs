@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Shared;
 using Shared.DataTransferObjects;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Service.Contracts {
 
         Task<bool> ValidateUser(UserForAuthenticationDto userForAuth);
 
-        Task<string> CreateToken();
+        Task<TokenDto> CreateToken(bool populateExp);
+
+        Task<TokenDto> RefreshToken(TokenDto tokenDto);
     }
 }
