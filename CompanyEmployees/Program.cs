@@ -33,6 +33,9 @@ builder.Services.Configure<ApiBehaviorOptions>(options => {
     options.SuppressModelStateInvalidFilter = true;
 });
 builder.Services.AddScoped<ValidationFilterAttribute>();
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
+
 
 
 
@@ -61,6 +64,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions {
 
 
 app.UseCors("CorsPolicy");
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 app.Run();
